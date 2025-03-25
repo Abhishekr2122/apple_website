@@ -1,10 +1,10 @@
+import Navbar from "./components/Navbar";
+
 function App() {
   return (
-    <>
-      <p className="text-3xl font-bold underline">
-        Welcome to the Apple website project
-      </p>
-    </>
+    <main className="bg-black">
+      <Navbar />
+    </main>
   );
 }
 
