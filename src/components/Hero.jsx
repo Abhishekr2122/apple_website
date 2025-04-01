@@ -1,3 +1,62 @@
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { heroVideo, smallHeroVideo } from "../utils";
+import { useState } from "react";
+import { useEffect } from "react";
+
 export default function Hero() {
-  return <div>This is the Hero section</div>;
+  const [videoSrc, setVideoSrc] = useState(
+    window.innerWidth < 480 ? smallHeroVideo : heroVideo
+  );
+
+  useGSAP(function () {
+    gsap.to("#hero", { opacity: 1, delay: 2 });
+    gsap.to("#cta", { opacity: 1, y: 0, delay: 2 });
+  }, []);
+
+  function handleVideoSrcSet() {
+    if (window.innerWidth < 480) {
+      setVideoSrc(smallHeroVideo);
+    } else {
+      setVideoSrc(heroVideo);
+    }
+  }
+
+  useEffect(function () {
+    window.addEventListener("resize", handleVideoSrcSet);
+
+    return () => {
+      window.removeEventListener("resize", handleVideoSrcSet);
+    };
+  }, []);
+
+  return (
+    <section className="w-full nav-height bg-black">
+      <div className="flex flex-center h-full w-full flex-col">
+        <p id="hero" className="hero-title">
+          iPhone 15 Pro{" "}
+        </p>
+        <div className="md:w-10/12 w-9/12">
+          <video
+            className="pointer-events-none"
+            autoPlay
+            muted
+            playsInline={true}
+            key={videoSrc}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        </div>
+        <div
+          id="cta"
+          className="flex flex-col items-center opacity-0 translate-y-20"
+        >
+          <a href="#highlights" className="btn">
+            Buy
+          </a>
+          <p className="font-normal text-xl">From $199/month or $999</p>
+        </div>
+      </div>
+    </section>
+  );
 }
