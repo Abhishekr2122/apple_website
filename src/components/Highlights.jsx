@@ -1,3 +1,8 @@
 export default function Highlights() {
-  return <div>This is the Highlights section</div>;
+  return (
+    <section
+      id="highlights"
+      className="w-screen overflow-hidden h-full common-padding bg-zinc"
+    ></section>
+  );
 }
