@@ -1,3 +1,13 @@
+import { hightlightsSlides } from "../constants";
+
 export default function VideoCarousel() {
-  return <>This is the Video Carousel</>;
+  return (
+    <>
+      <div className="flex items-center">
+        {hightlightsSlides.map(function (citem) {
+          <div key={citem.id}></div>;
+        })}
+      </div>
+    </>
+  );
 }
